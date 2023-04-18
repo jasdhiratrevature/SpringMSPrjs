@@ -1,0 +1,36 @@
+# ... Deployment YAML definition
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: allergy-svc
+spec:
+  selector:
+    matchLabels:
+      app: allergy-svc
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: allergy-svc
+    spec:
+      containers:
+        - name: allergy-svc
+          image: jasdhirinrevature/allergy-svc
+          ports:
+            - containerPort: 8082
+             # hostPort: 8082
+
+---
+# ... Service YAML definition
+#kubectl expose deployment allergy-service --port=8082 --target-port=8082 --name=allergy-svc --type=LoadBalancer
+apiVersion: v1
+kind: Service
+metadata:
+  name: allergy-svc
+spec:
+  selector:
+    app: allergy-svc
+  ports:
+    - port: 8082
+      targetPort: 8082
+  type: LoadBalancer

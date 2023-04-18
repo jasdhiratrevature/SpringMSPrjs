@@ -1,0 +1,36 @@
+# ... Deployment YAML definition
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: health-svc
+spec:
+  selector:
+    matchLabels:
+      app: health-svc
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: health-svc
+    spec:
+      containers:
+        - name: health-svc
+          image: jasdhirinrevature/health-svc
+          ports:
+            - containerPort: 8081
+             # hostPort: 8082
+
+---
+# ... Service YAML definition
+#kubectl expose deployment health-svc --port=8081 --target-port=8081 --name=health-svc --type=LoadBalancer
+apiVersion: v1
+kind: Service
+metadata:
+  name: health-svc
+spec:
+  selector:
+    app: health-svc
+  ports:
+    - port: 8081
+      targetPort: 8081
+  type: LoadBalancer

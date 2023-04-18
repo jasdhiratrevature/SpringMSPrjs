@@ -1,0 +1,35 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://jasdhir-rds.cvtq9j4axrge.us-east-1.rds.amazonaws.com:3306/db_allergies
+    username: admin
+    password: admin123
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      healthRecordAllergies:
+        register-health-indicator: true
+        event-consumer-buffer-size: 10
+        failure-rate-threshold: 50
+        minimum-number-of-calls: 5
+        automatic-transition-from-open-to-half-open-enabled: true
+        wait-duration-in-open-state: 5s
+        max-wait-duration-in-half-open-state: 10s
+        permitted-number-of-calls-in-half-open-state: 3
+        sliding-window-size: 10
+        sliding-window-type: count_based
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  health:
+    cassandra:
+      enabled: true
+  endpoint:
+    health:
+      show-details: always

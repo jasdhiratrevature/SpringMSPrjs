@@ -1,0 +1,46 @@
+version: "3"
+services:
+  allergy-svc:
+    image: jasdhirinrevature/allergy-svc
+    container_name: allergy-svc
+    ports:
+      - "8082:8082"
+   # extra_hosts:
+    #  - "dockerhost:192.168.1.15"
+    networks:
+      - ms-network
+   # expose:
+    #  - "8082"
+
+
+  health-svc:
+    image: jasdhirinrevature/health-svc
+    container_name: health-svc
+    ports:
+      - "8081:8081"
+   # extra_hosts:
+    #  - "dockerhost:192.168.1.15"
+    networks:
+      - ms-network
+    depends_on:
+      - allergy-svc
+   # expose:
+    #  - "8081"
+
+  api-gw:
+    image: jasdhirinrevature/spring-api-gw
+    container_name: spring-api-gw
+    ports:
+      - "8888:8888"
+   # extra_hosts:
+    #  - "dockerhost:192.168.1.15"
+    networks:
+      - ms-network
+    depends_on:
+      - health-svc
+      - allergy-svc
+   # expose:
+    #  - "8888"
+
+networks:
+  ms-network:

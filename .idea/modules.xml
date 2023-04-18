@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/JavaMSProjects.iml" filepath="$PROJECT_DIR$/.idea/JavaMSProjects.iml" />
+      <module fileurl="file://$PROJECT_DIR$/allergy-svc/allergy-svc.iml" filepath="$PROJECT_DIR$/allergy-svc/allergy-svc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/health-record-svc/health-record-svc.iml" filepath="$PROJECT_DIR$/health-record-svc/health-record-svc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-api-gw/spring-api-gw.iml" filepath="$PROJECT_DIR$/spring-api-gw/spring-api-gw.iml" />
+    </modules>
+  </component>
+</project>
